@@ -32,7 +32,7 @@ import okhttp3.Headers;
 
 public class DetailActivity extends YouTubeBaseActivity {
 
-    private  static final String YOUTUBE_API_KEY = "AIzaSyDyxMBEETzvClDvM9zKLsnvWdX7vG14fpI";
+    private String YOUTUBE_API_KEY;
     public static final String VIDEO_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     public static final String GENRE_URL = "https://api.themoviedb.org/3/genre/movie/list?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US";
 
@@ -44,11 +44,15 @@ public class DetailActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_detail);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
 
+        YOUTUBE_API_KEY = getString(R.string.youtube_api_key);
+
         Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
 
         binding.setMovie(movie);
 
         binding.tvCount.setText(movie.getRating() + " stars over " + movie.getVoteCount() + " reviews");
+
+        binding.tvRelease.setText("Released on " + movie.getReleaseDate());
 
         Map<Integer,String> genres = new HashMap<>();
 

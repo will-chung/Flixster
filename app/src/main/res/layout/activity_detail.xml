@@ -34,6 +34,13 @@
                 android:transitionName="title"
                 tools:text="Skylines" />
 
+            <TextView
+                android:id="@+id/tvRelease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#E4E6EB"
+                tools:text="Released on December 18, 2020" />
+
             <RatingBar
                 android:id="@+id/ratingBar"
                 style="@style/Widget.AppCompat.RatingBar.Indicator"
