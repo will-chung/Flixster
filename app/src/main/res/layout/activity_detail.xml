@@ -1,38 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetailActivity"
-    android:orientation="vertical"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="movie"
+            type="com.example.flixster.models.Movie" />
+    </data>
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/player"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="match_parent"
+        android:background="#18191A">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        tools:text="Skylines" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#18191A"
+            android:orientation="vertical"
+            tools:context=".DetailActivity">
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        style="@style/Widget.AppCompat.RatingBar.Indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:isIndicator="true"
-        android:numStars="10"
-        android:rating="8.5" />
+            <com.google.android.youtube.player.YouTubePlayerView
+                android:id="@+id/player"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
 
-    <TextView
-        android:id="@+id/tvOverview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="When a virus threatens to turn the now earth-dwelling friendly alien hybrids against humans, Captain Rose Corley must lead a team of elite mercenaries on a mission to the alien world in order to save what's left of humanity." />
-</LinearLayout>
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{movie.title}'
+                android:textColor="#E4E6EB"
+                android:textSize="30sp"
+                android:transitionName="title"
+                tools:text="Skylines" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="10"
+                android:rating='@{(float)movie.rating}' />
+
+            <TextView
+                android:id="@+id/tvCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#E4E6EB"
+                android:textStyle="italic"
+                tools:text="5.9 stars over 88 reviews" />
+
+            <TextView
+                android:id="@+id/tvGenres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#E4E6EB"
+                android:textStyle="bold"
+                tools:text="Genres: Genre 1, Genre 2" />
+
+            <TextView
+                android:id="@+id/tvOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{movie.overview}'
+                android:textColor="#E4E6EB"
+                android:transitionName="overview"
+                tools:text="When a virus threatens to turn the now earth-dwelling friendly alien hybrids against humans, Captain Rose Corley must lead a team of elite mercenaries on a mission to the alien world in order to save what's left of humanity." />
+        </LinearLayout>
+    </ScrollView>
+</layout>

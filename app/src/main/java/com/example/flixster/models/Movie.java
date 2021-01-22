@@ -1,5 +1,7 @@
 package com.example.flixster.models;
 
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,23 +13,30 @@ import java.util.List;
 @Parcel
 public class Movie {
 
+    int[] genreIds;
     int movieId;
     String backdropPath;
     String posterPath;
     String title;
     String overview;
     double rating;
+    int voteCount;
 
     // empty constructor needed by the Parceler library
     public Movie() {}
 
     public Movie(JSONObject jsonObject) throws JSONException {
+        JSONArray genreJSONArray = jsonObject.getJSONArray("genre_ids");
+        genreIds = new int[genreJSONArray.length()];
+        for(int i = 0; i < genreIds.length; ++i)
+            genreIds[i] = genreJSONArray.getInt(i);
         movieId = jsonObject.getInt("id");
         backdropPath = jsonObject.getString("backdrop_path");
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
         rating = jsonObject.getDouble("vote_average");
+        voteCount = jsonObject.getInt("vote_count");
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
@@ -61,4 +70,8 @@ public class Movie {
     public int getMovieId() {
         return movieId;
     }
+
+    public int[] getGenreIds() { return genreIds; }
+
+    public int getVoteCount() { return voteCount; }
 }
